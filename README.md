@@ -16,7 +16,7 @@ Android Compose 를 공부하기 위한 레포지토리입니다.
 </div>
 
 
-## [2. Jetpack Compose basics](./basic)
+## [2. Jetpack Compose basics](./basics)
 
 <div align="center">
 <img src="https://developer.android.com/codelabs/jetpack-compose-basics/img/1a7b3467851eec7b.gif" width="25%">
