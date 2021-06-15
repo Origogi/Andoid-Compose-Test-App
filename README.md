@@ -9,8 +9,6 @@ Android Compose 를 공부하기 위한 레포지토리입니다.
 
 ## [1. Tutorial: Jetpack Compose basics](./tutorial)
 
-### 실행화면
-
 <div align="center">
 <img src="https://user-images.githubusercontent.com/35194820/120441160-42b10780-c3bf-11eb-98a2-93e1c6f67959.png" width="25%">
 </div>
