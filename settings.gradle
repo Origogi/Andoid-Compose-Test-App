@@ -12,3 +12,5 @@ include ':customlayout'
 include ':scaffold'
 include ':list'
 include ':basics'
+include ':animation'
+
