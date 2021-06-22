@@ -65,16 +65,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.TabPosition
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Check
@@ -290,7 +281,7 @@ private fun HomeFloatingActionButton(
                 contentDescription = null
             )
 
-            AnimatedVisibility (extended) {
+            AnimatedVisibility(extended) {
                 Text(
                     text = stringResource(R.string.edit),
                     modifier = Modifier
@@ -378,16 +369,15 @@ private fun Header(
  * @param expanded Whether the row should be shown expanded with the topic body.
  * @param onClick Called when the row is clicked.
  */
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TopicRow(topic: String, expanded: Boolean, onClick: () -> Unit) {
     TopicRowSpacer(visible = expanded)
     Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick),
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth().animateContentSize(),
         elevation = 2.dp
     ) {
-        // TODO 3: Animate the size change of the content.
         Column(
             modifier = Modifier
                 .fillMaxWidth()
