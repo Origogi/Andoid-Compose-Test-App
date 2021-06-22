@@ -375,7 +375,9 @@ private fun TopicRow(topic: String, expanded: Boolean, onClick: () -> Unit) {
     TopicRowSpacer(visible = expanded)
     Surface(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth().animateContentSize(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .animateContentSize(),
         elevation = 2.dp
     ) {
         Column(
@@ -461,10 +463,34 @@ private fun HomeTabIndicator(
     tabPositions: List<TabPosition>,
     tabPage: TabPage
 ) {
-    // TODO 4: Animate these value changes.
-    val indicatorLeft = tabPositions[tabPage.ordinal].left
-    val indicatorRight = tabPositions[tabPage.ordinal].right
-    val color = if (tabPage == TabPage.Home) Purple700 else Green800
+    val transition = updateTransition(tabPage)
+
+    val indicatorLeft by transition.animateDp(label = "Indicator Left", transitionSpec = {
+        if (TabPage.Home isTransitioningTo TabPage.Work) {
+            spring(stiffness = Spring.StiffnessVeryLow)
+        } else {
+            spring(stiffness = Spring.StiffnessMedium)
+        }
+    }) { page ->
+        tabPositions[page.ordinal].left
+    }
+
+    val indicatorRight by transition.animateDp(label = "Indicator Right", transitionSpec = {
+        if (TabPage.Home isTransitioningTo TabPage.Work) {
+            spring(stiffness = Spring.StiffnessMedium)
+        } else {
+            spring(stiffness = Spring.StiffnessVeryLow)
+        }
+    }) { page ->
+        tabPositions[page.ordinal].right
+    }
+
+    val color by transition.animateColor(
+        label = "Border color"
+    ) { page ->
+        if (page == TabPage.Home) Purple700 else Green800
+    }
+
     Box(
         Modifier
             .fillMaxSize()
