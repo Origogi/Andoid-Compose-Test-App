@@ -21,13 +21,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.test.filters.SdkSuppress
 import com.example.compose.rally.ui.components.AnimatedCircle
 import com.example.compose.rally.ui.theme.RallyTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -47,6 +54,58 @@ class AnimatingCircleTests {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+    lateinit var navController: NavHostController
+
+    @Before
+    fun setupRallyNavHost() {
+        composeTestRule.setContent {
+            navController = rememberNavController()
+            RallyNavHost(navController = navController)
+        }
+    }
+
+
+    @Test
+    fun rallyNavHost() {
+        composeTestRule
+            .onNodeWithContentDescription("Overview Screen")
+            .assertIsDisplayed()
+    }
+
+
+    @Test
+    fun rallyNavHost_navigateToAllAccounts_viaUI() {
+        composeTestRule
+            .onNodeWithContentDescription("All Accounts")
+            .performClick()
+        composeTestRule
+            .onNodeWithContentDescription("Accounts Screen")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun rallyNavHost_navigateToBills_viaUI() {
+        // When click on "All Bills"
+        composeTestRule.onNodeWithContentDescription("All Bills").apply {
+            performScrollTo()
+            performClick()
+        }
+        // Then the route is "Bills"
+        val route = navController.currentBackStackEntry?.destination?.route
+        assertEquals(route, "Bills")
+    }
+
+    @Test
+    fun rallyNavHost_navigateToAllAccounts_callingNavigate() {
+        runBlocking {
+            withContext(Dispatchers.Main) {
+                navController.navigate(RallyScreen.Accounts.name)
+            }
+        }
+        composeTestRule
+            .onNodeWithContentDescription("Accounts Screen")
+            .assertIsDisplayed()
+    }
 
     @Test
     fun circleAnimation_idle_screenshot() {
@@ -93,7 +152,9 @@ class AnimatingCircleTests {
         composeTestRule.setContent {
             RallyTheme {
                 AnimatedCircle(
-                    modifier = Modifier.background(Color.White).size(320.dp),
+                    modifier = Modifier
+                        .background(Color.White)
+                        .size(320.dp),
                     proportions = listOf(0.25f, 0.5f, 0.25f),
                     colors = listOf(Color.Red, Color.DarkGray, Color.Black)
                 )
