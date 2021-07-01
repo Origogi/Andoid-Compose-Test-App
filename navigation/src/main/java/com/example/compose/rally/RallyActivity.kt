@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
+import androidx.navigation.navDeepLink
 import com.example.compose.rally.data.UserData
 import com.example.compose.rally.ui.accounts.SingleAccountBody
 import com.example.compose.rally.ui.components.RallyTabRow
@@ -96,6 +97,9 @@ fun RallyApp() {
                     "$accountName/{name}",
                     arguments = listOf(navArgument("name") {
                         type = NavType.StringType
+                    }),
+                    deepLinks = listOf(navDeepLink {
+                        uriPattern = "rally://$accountName/{name}"
                     })
                 ) { entry ->
                     val accountName = entry.arguments?.getString("name")
