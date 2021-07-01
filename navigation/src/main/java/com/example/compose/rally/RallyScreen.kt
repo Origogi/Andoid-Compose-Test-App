@@ -36,7 +36,9 @@ enum class RallyScreen(
 ) {
     Overview(
         icon = Icons.Filled.PieChart,
-        body = { OverviewBody() }
+        body = {
+            OverviewBody()
+        }
     ),
     Accounts(
         icon = Icons.Filled.AttachMoney,

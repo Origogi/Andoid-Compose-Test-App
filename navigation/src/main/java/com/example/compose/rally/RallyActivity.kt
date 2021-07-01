@@ -70,7 +70,8 @@ fun RallyApp() {
             NavHost(
                 navController = navController,
                 startDestination = RallyScreen.Overview.name,
-                modifier = Modifier.padding(innerPadding)) {
+                modifier = Modifier.padding(innerPadding)
+            ) {
                 composable(RallyScreen.Overview.name) {
                     OverviewBody()
                 }
@@ -81,13 +82,6 @@ fun RallyApp() {
                     BillsBody(bills = UserData.bills)
                 }
             }
-//            Box(Modifier.padding(innerPadding)) {
-//                currentScreen.content(
-//                    onScreenChange = { screen ->
-//                        currentScreen = RallyScreen.valueOf(screen)
-//                    }
-//                )
-//            }
         }
     }
 }
