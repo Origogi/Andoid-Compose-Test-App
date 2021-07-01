@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/customlayout" />
             <option value="$PROJECT_DIR$/list" />
             <option value="$PROJECT_DIR$/migration" />
+            <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/scaffold" />
             <option value="$PROJECT_DIR$/tutorial" />
           </set>
