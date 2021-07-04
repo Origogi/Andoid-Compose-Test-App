@@ -49,12 +49,12 @@ Android Compose 를 공부하기 위한 레포지토리입니다.
 	<tr><!-- 첫번째 줄 시작 -->
 	    <td>
           <div align="center">
-            <img src="https://developer.android.com/codelabs/jetpack-compose-theming/img/14515bb612cf4b30.png" width="50%>
+            <img src="https://developer.android.com/codelabs/jetpack-compose-theming/img/14515bb612cf4b30.png" width="50%">
            </div>
       </td>
 	    <td>
             <div align="center">
-              <img src="https://developer.android.com/codelabs/jetpack-compose-theming/img/1dffb8a706fb115.png" width="50%>
+              <img src="https://developer.android.com/codelabs/jetpack-compose-theming/img/1dffb8a706fb115.png" width="50%">
               </div>
 	</tr>
  </table>
